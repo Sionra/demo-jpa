@@ -1,5 +1,8 @@
 package fr.diginamic;
 
+import fr.diginamic.entity.Client;
+import fr.diginamic.entity.Emprunt;
+import fr.diginamic.entity.Livre;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -15,6 +18,21 @@ public class ConnexionJpa {
         livreRequest(1, em);
         livreRequest(2, em);
         livreRequest(3, em);
+
+       Emprunt e1 = em.find(Emprunt.class, 1);
+        if(e1 != null){
+            System.out.println(e1);
+            for (Livre var : e1.getLivres()){
+                System.out.println("-" + var);
+            }
+        }
+
+        Client c1 = em.find(Client.class, 1);
+        if (c1 != null){
+            for (Emprunt var : c1.getEmprunts()){
+                System.out.println(var);
+            }
+        }
 
         //Close
         em.close();
